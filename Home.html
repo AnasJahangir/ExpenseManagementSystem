@@ -1,0 +1,232 @@
+<script>
+  function homePage() {
+  var currentUser = localStorage.getItem("currentUser");
+  if (JSON.parse(currentUser) == null) {
+    location.href = 'index.html';
+  }
+  }
+  homePage()
+</script>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Crafted by Anas Jahangir using HTML, CSS, and JavaScript, this Expense Management System is a robust and user-friendly financial solution. It simplifies expense tracking, budgeting, and reporting, offering valuable insights into your financial habits. Your data is securely stored, providing peace of mind. We welcome your feedback and suggestions for improvement.">
+
+    <title>Expense Management System || Crafted by Anas Jahangir</title>
+    <link rel="icon" href="https://anas-todo-web.netlify.app/favicon/favicon-16x16.png" sizes="16x16" type="image/png">
+    <link rel="icon" href="https://anas-todo-web.netlify.app/favicon/favicon-32x32.png" sizes="16x16" type="image/png">
+    <link rel="icon" href="https://anas-todo-web.netlify.app/favicon/android-chrome-192x192.png" sizes="192x192" type="image/png">
+    <link rel="apple-touch-icon" href="https://anas-todo-web.netlify.app/favicon/apple-touch-icon.png">
+    <meta property="og:title" content="To-do" />
+    <meta property="og:description" content="Crafted by Anas Jahangir using HTML, CSS, and JavaScript, this Expense Management System is a robust and user-friendly financial solution. It simplifies expense tracking, budgeting, and reporting, offering valuable insights into your financial habits. Your data is securely stored, providing peace of mind. We welcome your feedback and suggestions for improvement." />
+    <meta property="og:url" content="https://Anas-todo-web.netlify.app/" />
+    <meta property="og:image" content="https://anas-todo-web.netlify.app/images/ExpenseManagementSystem.png" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+     <link rel="stylesheet" href="style.css">
+   
+
+
+</head>
+<body>
+    
+
+ 
+
+   <div class="main-home my-4">
+
+    <div class="all-content">
+      
+        <div class="user-details">
+        
+          <div class="mb-4">
+           
+            <div class="d-flex justify-content-center flex-column align-items-center">
+              <i class="fa-solid fa-circle-user user-icone py-3 " data-bs-toggle="modal" data-bs-target="#User"></i>
+            <h3 class="m-0 text-capitalize"  id="UserName" >Anas</h3>
+
+            </div> 
+          </div>
+
+
+            <!-- User Modal -->
+            <div class="modal fade" data-bs-backdrop="static" id="User" tabindex="-1" aria-labelledby="UserLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-body">
+
+                    <div class="d-flex justify-content-center py-3 flex-column align-items-center">
+                      <i class="fa-solid fa-circle-user py-3"></i>
+                    <h3  class="text-capitalize" id="UserName2">Anas</h3>
+                    </div> 
+
+                    <p>Name: <input  type="text" id="UserNameinp" readonly  class="UsersInp"></p>
+                    <p>Email: <input  type="text" id="Useremail" readonly class="UsersInp"></p>
+                    <p>Password: <input  type="password" id="userPass" readonly class="UsersInp"></p>
+
+                  </div>
+                  <div class="modal-footer">
+                    <div class="modal-btns">
+                      <button class="btn btn-block edit-btn btn-primary" onclick="editeAccBtn()" id="edit-btn">Edit</button>
+                      <button class="btn btn-warning btn-block close-btn text-white" data-bs-dismiss="modal" id="UserModalClose">Close</button>
+                      <button class="btn btn-danger btn-block logout-btn" onclick="logout()">Log Out</button>
+                      <button class="btn btn-danger btn-block logout-btn" onclick="deleteAcc()">Delete Account</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+          <div class="mt-2 mb-3 d-flex justify-content-center">
+
+            <div >
+              <i class="fa-solid fa-calculator"></i>
+            </div>
+            <div class="ms-4">
+              <h4><b>YOUR BALANCE</b></h4>
+              <h3 >$<span id="balance">0.00</span></h3> 
+            </div>
+        
+          </div>
+
+          <div class="d-flex justify-content-center py-2 px-5 income-expenses mb-3">
+            <div  class="px-4  border-end border-1"><div class="mb-2">INCOME</div><span class="income" >$<span id="income">0.00</span></span></div>
+            <div  class="px-4"><div class="mb-2"  >EXPENSES</div><span class="expenses" >$<span id="expenses">0.00</span></span></div>
+          </div>
+
+        </div>
+
+
+    <!-- Add Transaction Modal -->
+
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header ">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">Add Expense</h1>
+            <span data-bs-dismiss="modal"><i class="fa-solid fa-x"></i></span>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="Description" class="form-label">Description</label>
+              <textarea class="form-control" id="Description" rows="3"></textarea>
+            </div>
+
+            <div class="mb-3">
+              <label for="Amount" class="form-label">Amount</label>
+              <input type="number" class="form-control" id="Amount" placeholder="Enter Amount">
+            </div>
+
+            <div class="mb-3">
+              <label for="addDate" class="form-label">Date</label>
+              <input type="date" class="form-control" id="addDate">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" id="close-trans" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="modal-save" onclick="addTransaction()"> <i class="fa-solid fa-floppy-disk me-1"></i> Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+<!-- Edite Transaction Modal -->
+  <div class="modal fade" id="editTrans" tabindex="-1" data-bs-backdrop="static" aria-labelledby="editTransLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="editTransLabel">Edite Expense</h1>
+          <span data-bs-dismiss="modal"><i class="fa-solid fa-x"></i></span>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="Description" class="form-label">Description</label>
+            <textarea class="form-control" id="eDescription" rows="3"></textarea>
+          </div>
+
+          <div class="mb-3">
+            <label for="Amount" class="form-label">Amount</label>
+            <input type="number" class="form-control" id="eAmount" placeholder="Enter Amount">
+          </div>
+
+          <div class="mb-3">
+            <label for="addDate" class="form-label">Date</label>
+            <input type="date" class="form-control" id="eaddDate">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="eClose">Close</button>
+          <button type="button" class="btn btn-primary" id="modal-edite" onclick="editSave()"> <i class="fa-solid fa-floppy-disk me-1"></i> Edite</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div class="py-3  w-100 mt-5">
+      <button  type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn btn-primary Add" id="Add">Add New Transaction</button>
+      <button class="btn btn-danger ms-2" onclick="deleteAllTrans()">Delete All Transaction</button>
+    </div>
+
+    <div class="table-div px-3 py-3 border flex-column" id="table-div">
+
+    <div class="table-responsive">
+    <table class="table table-hover table-bordered m-0 text-center">
+        <thead>
+          <tr >
+            <th scope="col">ID</th>
+            <th scope="col">Description</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Date</th>
+            <th scope="col">Edite</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody id="tbody">
+  
+          
+        </tbody>
+      </table>
+    </div>
+        <h1 class="no-data text-center mt-5" id="not-found">Transactions not found.</h1>
+      
+    </div>
+
+   </div>
+
+</div>
+    <footer>
+  
+  
+        <div class="main-footer">
+            <div>
+                <h1 class="anas">Anas jahangir</h1>
+            </div>
+
+            <div class="main-icons">
+              
+              <a href="https://anasjahangir.netlify.app" target="_blank"><i class="fa-solid fa-circle-user" ></i></a>
+                <a href="https://github.com/AnasJahangir" target="_blank"><i class="fa-brands fa-github"></i></a>
+                <a href="https://www.facebook.com/AnasJahangir0" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                <a href="https://twitter.com/AnasJahangir0" target="_blank"><i class="fa-brands fa-twitter"></i></a>
+                <a href="https://www.linkedin.com/in/anasjahangir/" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="https://wa.me/923192844932" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+            </div>
+        </div>
+
+        <div class="p">
+            <p>&copy; 2023 Anas Jahangir. All Rights Reserved. | Designed and Developed by Anas Jahangir</p>
+        </div>
+        
+
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="app.js"></script>
+</body>
+</html>
