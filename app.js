@@ -77,7 +77,7 @@ links.forEach(link => {
                     iconColor: '#4070F4',
                   }).then(() => {
                     if (true) {
-                        location.href = './Home.html';
+                        location.href = 'https://anas-expense.netlify.app/home';
                     }
                   });
          
@@ -149,7 +149,7 @@ links.forEach(link => {
                 iconColor: '#4070F4',
               }).then(() => {
                 if (true) {
-                    location.href = './Home.html';
+                    location.href = 'https://anas-expense.netlify.app/home';
                 }
               });
 
@@ -619,7 +619,7 @@ links.forEach(link => {
       }).then((result) => {
         if (result.isConfirmed) {
         localStorage.setItem("currentUser",null)
-        location.href = "index.html"
+        location.href = "https://anas-expense.netlify.app/"
 
       }
     }
@@ -645,7 +645,7 @@ links.forEach(link => {
   
           localStorage.setItem("currentUser",null)
           localStorage.removeItem(userEmail)
-          location.href = "index.html"
+          location.href = "https://anas-expense.netlify.app/"
   
         }
         })
